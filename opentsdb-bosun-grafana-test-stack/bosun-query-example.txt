@@ -1,0 +1,4 @@
+$a=q("sum:1m-avg:rate:test-2.value", "500m", "1m")
+$b=q("sum:1m-avg:rate:test-2.zero", "500m", "1m")
+$c = $a / $b
+$a

@@ -1,2 +1,2 @@
 # misc-learning
-Miscellaneous Learning
+Miscellaneous learning repo

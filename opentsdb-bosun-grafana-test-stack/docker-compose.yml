@@ -1,0 +1,37 @@
+version: "3.0"
+
+services:
+  opentsdb:
+    container_name: opentsdb
+    image: petergrace/opentsdb-docker:latest
+    ports:
+      - 127.0.0.1:4242:4242
+      - 127.0.0.1:16010:16010
+    volumes:
+      - ./opentsdb.conf:/etc/opentsdb/opentsdb.conf
+#    - /opt/development/opentsdb-alerting/hbase:/data/hbase:ro
+    networks:
+      main: null
+  bosun:
+    container_name: bosun
+    image: stackexchange/bosun:latest
+    environment:
+       - TSDBRELAY_OPTS=-b 0.0.0.0:8070 -t opentsdb:4242
+    ports:
+      - 127.0.0.1:8070:8070
+    networks:
+      main: null
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=password
+    volumes:
+      - ./grafana-provisioning:/etc/grafana/provisioning
+    ports:
+      - 127.0.0.1:3000:3000
+    networks:
+      main: null
+networks:
+  main: null

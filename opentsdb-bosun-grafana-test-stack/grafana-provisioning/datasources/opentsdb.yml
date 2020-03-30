@@ -1,0 +1,10 @@
+apiVersion: 1
+
+datasources:
+  - name: OpenTsdb
+    type: opentsdb
+    access: proxy
+    url: http://opentsdb:4242
+    jsonData:
+      tsdbResolution: 1
+      tsdbVersion: 2.3
